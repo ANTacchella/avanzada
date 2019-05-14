@@ -22,15 +22,5 @@ public class ColaHL extends ListaSimplementeEnlazada implements Cola {
 	public Object peek() throws ColaVaciaException {
 		return getPrimerNodo().getDatos();
 	}
-	
-	@Override
-	public boolean isEmpty() {
-		return isEmpty();
-	}
-
-	@Override
-	public void empty() {
-		empty();
-	}
 
 }

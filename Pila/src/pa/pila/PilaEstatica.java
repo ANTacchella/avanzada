@@ -5,17 +5,16 @@ public class PilaEstatica implements Pila{
 	private Object[] pila;
 	private int tope;
 	
-	public PilaEstatica(int tam) {
-		pila = new Object[tam];
+	public PilaEstatica() {
+		pila = new Object[1];
 		tope = 0;
 	}
 	
 	@Override
 	public void push(Object dato) throws PilaLlenaException{
-		if (this.tope == pila.length) 
-			throw new PilaLlenaException("No es posible insertar nuevos elementos. "
-											+ "La pila se encuentra llena.");
-		this.pila[this.tope++] = dato;
+		if (tope == pila.length) 
+			pila = java.util.Arrays.copyOf(pila, pila.length * 2);
+		pila[tope++] = dato;
 	}
 
 	@Override

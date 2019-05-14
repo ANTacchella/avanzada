@@ -15,7 +15,7 @@ public class ColaEstaticaTest {
 	
 	@Before
 	public void setUp() {
-		cola = new ColaEstatica(2);
+		cola = new ColaEstatica();
 	}
 	
 	@Test
@@ -23,18 +23,6 @@ public class ColaEstaticaTest {
 		cola.offer(2);
 		cola.offer("String");
 		assertEquals(2, cola.peek());
-	}
-	
-	@Test
-	public void testOfferMasDelTamaño() {
-		cola.offer(2);
-		cola.offer("String");
-		try {
-			cola.offer(true);
-		}
-		catch (ColaLlenaException excp){
-			System.out.println(excp);
-		}
 	}
 	
 	@Test

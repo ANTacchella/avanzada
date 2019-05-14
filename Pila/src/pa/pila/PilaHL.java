@@ -23,14 +23,4 @@ public class PilaHL extends ListaSimplementeEnlazada implements Pila {
 		return getPrimerNodo().getDatos();
 	}
 
-	@Override
-	public boolean isEmpty() {
-		return isEmpty();
-	}
-
-	@Override
-	public void empty() {
-		empty();
-	}
-
 }

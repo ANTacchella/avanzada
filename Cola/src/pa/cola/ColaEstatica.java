@@ -7,23 +7,19 @@ public class ColaEstatica implements Cola{
 	private int pri;
 	private int ult;
 	
-	public ColaEstatica(int tam) {
-		cola = new Object[tam];
+	public ColaEstatica() {
+		cola = new Object[1];
 		size = 0;
 		pri = 0;
 		ult = 0;
 	}
 	
 	@Override
-	public void offer(Object dato) throws ColaLlenaException {
+	public void offer(Object dato) {
 		if(size == cola.length)
-			throw new ColaLlenaException("No es posible insertar nuevos elementos."
-										+ "La cola se encuentra llena");
+			cola = java.util.Arrays.copyOf(cola, cola.length * 2);
 		cola[ult] = dato;
-		if(ult == cola.length - 1)
-			ult = 0;
-		else
-			ult++;
+		ult++;
 		size++;
 	}
 
@@ -33,11 +29,8 @@ public class ColaEstatica implements Cola{
 			throw new ColaVaciaException("No es posible retirar más elementos. "
 										+ "La cola se encuentra vacía.");
 		Object dato = cola[pri];
-		pri = (pri+1)%cola.length;
+		pri = pri+1;
 		size--;
-		if(size == 0) {
-			pri = ult = 0;
-		}
 		return dato;
 	}
 
@@ -58,5 +51,5 @@ public class ColaEstatica implements Cola{
 	public void empty() {
 		pri = ult = size = 0;		
 	}
-
+	
 }

@@ -15,7 +15,7 @@ public class PilaEstaticaTest {
 	
 	@Before
 	public void setUp() throws Exception{
-		pila = new PilaEstatica(2);
+		pila = new PilaEstatica();
 	}
 	
 	@Test
@@ -23,18 +23,6 @@ public class PilaEstaticaTest {
 		pila.push(2);
 		pila.push("String");
 		assertEquals("String", pila.peek());
-	}
-	
-	@Test
-	public void testPushMasDelTamaño() {
-		pila.push(2);
-		pila.push("String");
-		try {
-			pila.push(true);
-		}
-		catch (PilaLlenaException excp){
-			System.out.println(excp);
-		}
 	}
 	
 	@Test

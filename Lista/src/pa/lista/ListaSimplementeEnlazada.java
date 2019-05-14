@@ -5,6 +5,7 @@ import pa.nodo.*;
 public class ListaSimplementeEnlazada {
 	private Nodo primerNodo;
 	private Nodo ultimoNodo;
+	private int size;
 	private String nombre;
 	
 	public ListaSimplementeEnlazada() {
@@ -13,6 +14,7 @@ public class ListaSimplementeEnlazada {
 	
 	public ListaSimplementeEnlazada(String nombre) {
 		this.nombre = nombre;
+		size = 0;
 		primerNodo = ultimoNodo = null;
 	}
 	
@@ -31,13 +33,14 @@ public class ListaSimplementeEnlazada {
 			ultimoNodo.setNodoSiguiente(new Nodo(dato));
 			ultimoNodo = ultimoNodo.getNodoSiguiente();
 		}
+		size++;
 	}
 	
 	public Object popBack() throws ListaVaciaException{
 		Nodo actual;
 		if(isEmpty())
 			throw new ListaVaciaException("No hay más datos que retirar. "
-										+ "La " + nombre + " lista está vacía.");
+										+ "La " + nombre + " está vacía.");
 		Object datoEliminado = ultimoNodo.getDatos();
 		
 		if(primerNodo == ultimoNodo)
@@ -51,19 +54,16 @@ public class ListaSimplementeEnlazada {
 			ultimoNodo = actual;
 			actual.setNodoSiguiente(null);
 		}
-		
+		size--;
 		return datoEliminado;
 	}
 	
 	public void pushFront(Object dato) {
-		Nodo aux;
 		if(isEmpty())
 			primerNodo = ultimoNodo = new Nodo(dato);
-		
-		else {
-			aux = new Nodo(dato, primerNodo);
-			primerNodo = aux;
-		}	
+		else 
+			primerNodo = new Nodo(dato, primerNodo);
+		size++;
 	}
 	
 	public Object popFront() throws ListaVaciaException { 
@@ -78,7 +78,7 @@ public class ListaSimplementeEnlazada {
 		
 		else
 			primerNodo = primerNodo.getNodoSiguiente();
-		
+		size--;
 		return datoEliminado;
 	}
 	
@@ -99,7 +99,8 @@ public class ListaSimplementeEnlazada {
 			if(nodoAEliminar == ultimoNodo)
 				ultimoNodo = actual;
 			actual.setNodoSiguiente(nodoAEliminar.getNodoSiguiente());
-		}			
+		}
+		size--;
 	}
 	
 	public void reverse() {
@@ -142,6 +143,7 @@ public class ListaSimplementeEnlazada {
 			aux.setNodoSiguiente(actual.getNodoSiguiente());
 			actual.setNodoSiguiente(aux);
 		}
+		size++;
 	}
 	
 	public void eraseAt(int pos) throws DatoNoEncontradoException{
@@ -151,6 +153,7 @@ public class ListaSimplementeEnlazada {
 			if(primerNodo == ultimoNodo)
 				primerNodo = ultimoNodo = null;
 			primerNodo = primerNodo.getNodoSiguiente();
+			size--;
 		}
 		else {
 			while(actual.getNodoSiguiente() != null && pos > 1) {
@@ -164,6 +167,7 @@ public class ListaSimplementeEnlazada {
 			if(siguiente  == ultimoNodo)
 				ultimoNodo = actual;
 			actual.setNodoSiguiente(siguiente.getNodoSiguiente());
+			size--;
 		}
 	}
 	
@@ -205,16 +209,7 @@ public class ListaSimplementeEnlazada {
 		return aux.getDatos();
 	}
 
-	
 	public int size() {
-		int size = 0;
-
-		Nodo actual = primerNodo;
-		
-		while(actual != null) {
-			actual = actual.getNodoSiguiente();
-			size++;
-		}
 		return size;
 	}
 }
