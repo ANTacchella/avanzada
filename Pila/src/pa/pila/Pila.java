@@ -2,7 +2,7 @@ package pa.pila;
 
 public interface Pila {
 	
-	void push(Object dato) throws RuntimeException;
+	void push(Object dato);
 	Object pop() throws RuntimeException;
 	Object peek() throws RuntimeException;
 	boolean isEmpty();
