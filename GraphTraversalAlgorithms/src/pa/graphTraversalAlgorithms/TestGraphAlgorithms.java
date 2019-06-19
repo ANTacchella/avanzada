@@ -37,7 +37,6 @@ public class TestGraphAlgorithms {
 		ArrayList<Object> list5 = new ArrayList<Object>();
 		list5.add(4);
 		list5.add(6);
-		list5.add(7);
 		grafo[5] = list5;
 		ArrayList<Object> list6 = new ArrayList<Object>();
 		list6.add(5);
@@ -71,5 +70,10 @@ public class TestGraphAlgorithms {
 		DFS dfs = new DFS(grafo);
 		dfs.recorrer(0);
 	}
-
+	
+	@Test
+	public void testRecorrridoBFS() {
+		BFS bfs = new BFS(grafo);
+		bfs.recorrer(0);
+	}
 }
