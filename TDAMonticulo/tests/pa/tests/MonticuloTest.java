@@ -63,7 +63,7 @@ public class MonticuloTest {
 		monticulo.insertar(-5);
 		monticulo.insertar(0);
 		monticulo.insertar(1);
-		monticulo.insertar(3);
+		monticulo.insertar(-3);
 		monticulo.insertar(2);
 		monticulo.insertar(4);
 		monticulo.insertar(3);
