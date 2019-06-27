@@ -1,6 +1,7 @@
 package pa.graphTraversalAlgorithms;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,7 +14,16 @@ public class TestGraphAlgorithms {
 	
 	ArrayList<Object>[] grafoArrayList;
 	LinkedList<Vertice>[] grafoLinkedList;
-	LinkedList<Vertice>[] grafoPrimKruskal;
+	LinkedList<Vertice>[] grafoPrim;
+	LinkedList<Arista> grafoKruskal;
+	
+	public void addEdge(int source, int destination, int weight) {
+		Arista edge = new Arista(source, destination, weight);
+		grafoKruskal.add(edge);
+
+		edge = new Arista(destination, source, weight);
+		grafoKruskal.add(edge); // for undirected graph
+	}
 	
 	@Before
 	public void setUp() throws Exception {
@@ -96,48 +106,63 @@ public class TestGraphAlgorithms {
 		LinkedList<Vertice> list17 = new LinkedList<Vertice>();
 		grafoLinkedList[4] = list17;
 		
-		//Grafo para Prim y Kruskal
-		grafoPrimKruskal = new LinkedList[7];
-		for(int i = 0; i < grafoPrimKruskal.length; i++) {
-			grafoPrimKruskal[i] = new LinkedList<Vertice>();
+		//Grafo para Prim
+		grafoPrim = new LinkedList[7];
+		for(int i = 0; i < grafoPrim.length; i++) {
+			grafoPrim[i] = new LinkedList<Vertice>();
 		}
 		Vertice v8 = new Vertice(1,2);
-		grafoPrimKruskal[0].add(v8);
+		grafoPrim[0].add(v8);
 		Vertice v9 = new Vertice(3,1);
-		grafoPrimKruskal[0].add(v9);
+		grafoPrim[0].add(v9);
 		Vertice v10 = new Vertice(2,4);
-		grafoPrimKruskal[0].add(v10);
+		grafoPrim[0].add(v10);
 		
 		Vertice v11 = new Vertice(0,2);
-		grafoPrimKruskal[1].add(v11);
-		grafoPrimKruskal[1].add(new Vertice(3,3));
-		grafoPrimKruskal[1].add(new Vertice(4,10));
+		grafoPrim[1].add(v11);
+		grafoPrim[1].add(new Vertice(3,3));
+		grafoPrim[1].add(new Vertice(4,10));
 		
-		grafoPrimKruskal[2].add(new Vertice(0,4));
-		grafoPrimKruskal[2].add(new Vertice(3,2));
-		grafoPrimKruskal[2].add(new Vertice(5,5));
+		grafoPrim[2].add(new Vertice(0,4));
+		grafoPrim[2].add(new Vertice(3,2));
+		grafoPrim[2].add(new Vertice(5,5));
 		
-		grafoPrimKruskal[3].add(new Vertice(0,1));
-		grafoPrimKruskal[3].add(new Vertice(1,3));
-		grafoPrimKruskal[3].add(new Vertice(2,2));
-		grafoPrimKruskal[3].add(new Vertice(5,8));
-		grafoPrimKruskal[3].add(new Vertice(6,4));
-		grafoPrimKruskal[3].add(new Vertice(4,7));
+		grafoPrim[3].add(new Vertice(0,1));
+		grafoPrim[3].add(new Vertice(1,3));
+		grafoPrim[3].add(new Vertice(2,2));
+		grafoPrim[3].add(new Vertice(5,8));
+		grafoPrim[3].add(new Vertice(6,4));
+		grafoPrim[3].add(new Vertice(4,7));
 		
-		grafoPrimKruskal[4].add(new Vertice(1,10));
-		grafoPrimKruskal[4].add(new Vertice(3,7));
-		grafoPrimKruskal[4].add(new Vertice(6,6));
+		grafoPrim[4].add(new Vertice(1,10));
+		grafoPrim[4].add(new Vertice(3,7));
+		grafoPrim[4].add(new Vertice(6,6));
 		
-		grafoPrimKruskal[5].add(new Vertice(2,5));
-		grafoPrimKruskal[5].add(new Vertice(3,8));
-		grafoPrimKruskal[5].add(new Vertice(6,1));
+		grafoPrim[5].add(new Vertice(2,5));
+		grafoPrim[5].add(new Vertice(3,8));
+		grafoPrim[5].add(new Vertice(6,1));
 		
-		grafoPrimKruskal[6].add(new Vertice(5,1));
-		grafoPrimKruskal[6].add(new Vertice(3,4));
-		grafoPrimKruskal[6].add(new Vertice(4,6));
+		grafoPrim[6].add(new Vertice(5,1));
+		grafoPrim[6].add(new Vertice(3,4));
+		grafoPrim[6].add(new Vertice(4,6));
+		
+		//Grafo para Kruskal
+		grafoKruskal = new LinkedList<Arista>();
+		addEdge(0, 1, 2);
+		addEdge(0, 3, 1);
+		addEdge(0, 2, 4);
+		addEdge(1, 3, 3);
+		addEdge(1, 4, 10);
+		addEdge(2, 3, 2);
+		addEdge(2, 5, 5);
+		addEdge(3, 4, 7);
+		addEdge(3, 6, 4);
+		addEdge(3, 5, 8);
+		addEdge(4, 6, 6);
+		addEdge(5, 6, 1);
 		
 	}
-
+	
 	@Test
 	public void testRecorrridoDFS() {
 		DFS dfs = new DFS(grafoArrayList);
@@ -170,9 +195,26 @@ public class TestGraphAlgorithms {
 	
 	@Test
 	public void testPrim() {
-		Prim prim = new Prim(grafoPrimKruskal);
+		Prim prim = new Prim(grafoPrim);
+		int sum = 0;
 		int[] agm = {-1,0,3,0,6,6,3}; 
 		prim.obtenerAGM(0);
+		for(int i = 0; i < prim.distancia.length; i++) {
+			sum += prim.distancia[i];
+		}
+		assertEquals(16, sum);
 		assertArrayEquals(agm, prim.agm);
-	}	
+	}
+	
+	@Test
+	public void testKruskal() {
+		Kruskal kruskal = new Kruskal(grafoKruskal, 7);
+		int sum = 0;
+		kruskal.obtenerAGM();
+		for(Arista a: kruskal.agm) {
+			sum += a.costo;
+		}
+		assertEquals(16, sum);
+		//assertArrayEquals(agm, prim.agm);
+	}
 }
