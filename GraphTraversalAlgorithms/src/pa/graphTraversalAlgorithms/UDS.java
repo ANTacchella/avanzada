@@ -23,13 +23,13 @@ public class UDS {
 	}
 	
 	public void union(int x, int y) {
-		int px = find(x);
-		int py = find(y);
+		x = find(x);
+		y = find(y);
 		
 		if(altura[x] < altura[y])
-			padre[x] = py;
+			padre[x] = y;
 		else
-			padre[y] = px;
+			padre[y] = x;
 		if(altura[x] == altura[y])
 			altura[x] = altura[x] + 1;
 	}
