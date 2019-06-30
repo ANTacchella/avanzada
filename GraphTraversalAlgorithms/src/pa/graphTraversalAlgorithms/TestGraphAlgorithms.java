@@ -84,22 +84,22 @@ public class TestGraphAlgorithms {
 		LinkedList<Vertice> list13 = new LinkedList<Vertice>();
 		Vertice v1 = new Vertice(1,10);
 		list13.add(v1);
-		Vertice v2 = new Vertice(4,100);
-		list13.add(v2);
+		//Vertice v2 = new Vertice(4,100);
+		//list13.add(v2);
 		Vertice v3 = new Vertice(3,30);
 		list13.add(v3);
 		grafoLinkedList[0] = list13;
 		LinkedList<Vertice> list14 = new LinkedList<Vertice>();
-		Vertice v4 = new Vertice(2,50);
-		list14.add(v4);
+		//Vertice v4 = new Vertice(2,50);
+		//list14.add(v4);
 		grafoLinkedList[1] = list14;
 		LinkedList<Vertice> list15 = new LinkedList<Vertice>();
 		Vertice v5 = new Vertice(4,10);
 		list15.add(v5);
 		grafoLinkedList[2] = list15;
 		LinkedList<Vertice> list16 = new LinkedList<Vertice>();
-		Vertice v6 = new Vertice(2,20);
-		list16.add(v6);
+		//Vertice v6 = new Vertice(2,20);
+		//list16.add(v6);
 		Vertice v7 = new Vertice(4,60);
 		list16.add(v7);
 		grafoLinkedList[3] = list16;
@@ -178,17 +178,19 @@ public class TestGraphAlgorithms {
 	@Test
 	public void testDijkstra() {
 		Dijkstra dijkstra = new Dijkstra(grafoLinkedList);
-		int[] vectorEsperado = {0,10,50,30,60}; 
-		int[] vectorPrecedentes = {0,3,0,2};
+		int[] vectorEsperado = {0,10,Integer.MAX_VALUE,30,90};
+		//int[] vectorEsperado = {0,10,50,30,60};
+		//int[] vectorPrecedentes = {0,3,0,2};
 		dijkstra.obtenerCostoMinimo(0);
 		assertArrayEquals(vectorEsperado, dijkstra.costosMinimos);
-		assertArrayEquals(vectorPrecedentes, dijkstra.precedentes);
+		//assertArrayEquals(vectorPrecedentes, dijkstra.precedentes);
 	}	
 	
 	@Test
 	public void testDijkstraPQ() {
 		Dijkstra dijkstra = new Dijkstra(grafoLinkedList);
-		int[] vectorEsperado = {0,10,50,30,60}; 
+		int[] vectorEsperado = {0,10,Integer.MAX_VALUE,30,90};
+		//int[] vectorEsperado = {0,10,50,30,60}; 
 		dijkstra.obtenerCostoMinimoPQ(0);
 		assertArrayEquals(vectorEsperado, dijkstra.costosMinimos);
 	}	

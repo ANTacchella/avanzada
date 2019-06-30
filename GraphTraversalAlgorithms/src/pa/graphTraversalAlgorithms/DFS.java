@@ -18,15 +18,13 @@ public class DFS {
 		pila.push(verticeInicial);
 		visitados[(int) verticeInicial] = true;
 		while(!pila.isEmpty()) {
-			Object v = pila.peek();
+			Object v = pila.pop();
 			for(Object w: grafo[(int) v]) {
 				if(!visitados[(int) w]) {
 					pila.push(w);
 					visitados[(int) w] = true;
-					v = w;
 				}
 			}			
-			pila.pop();
 		}
 		
 	}

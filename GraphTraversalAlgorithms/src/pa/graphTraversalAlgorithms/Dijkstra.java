@@ -38,7 +38,7 @@ public class Dijkstra {
 			visitados[w] = true;
 			
 			for(Vertice v1: grafo[w]) {
-				if(costosMinimos[v1.numeroVertice] > costosMinimos[w] + v1.costo) {
+				if(!visitados[v1.numeroVertice] && costosMinimos[v1.numeroVertice] > costosMinimos[w] + v1.costo) {
 					costosMinimos[v1.numeroVertice] = costosMinimos[w] + v1.costo;
 					precedentes[v1.numeroVertice - 1] = w;
 				}
